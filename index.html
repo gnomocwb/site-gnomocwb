@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gnomo CWB</title>
+  <style>
+    :root {
+      --bg: #0a1920;
+      --bg-2: #0f2229;
+      --bg-3: #132f3a;
+      --line: #1d3e4a;
+      --text: #d8e1e5;
+      --text-dim: #7a8d94;
+      --accent: #3a8a96;
+      --accent-dim: #2a6f7a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      font-weight: 300;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* HEADER */
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      background: rgba(10, 25, 32, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+        .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      gap: 1.5rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.28rem 0.75rem;
+      background: rgba(58, 138, 150, 0.08);
+      border: 1px solid rgba(58, 138, 150, 0.2);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-mark {
+      width: 28px !important;
+      height: 28px !important;
+      min-width: 28px !important;
+      max-width: 28px !important;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 1.05rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .brand-name span {
+      color: var(--text-dim);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+        /* HERO */
+    .hero {
+      position: relative;
+      padding: 6rem 0 5rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -10%;
+      left: -5%;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(58, 138, 150, 0.14) 0%, transparent 65%);
+      pointer-events: none;
+      border-radius: 50%;
+      filter: blur(40px);
+      z-index: 0;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(58, 138, 150, 0.1);
+      border: 1px solid rgba(58, 138, 150, 0.25);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.75rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      display: inline-block;
+      animation: pulseGlow 2.2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      padding-bottom: 0.4rem;
+      background: linear-gradient(135deg, #ffffff 45%, #9abec7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+    }
+
+    .vulcan-salute {
+      -webkit-text-fill-color: initial;
+      display: inline-block;
+      transform-origin: 70% 70%;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: default;
+    }
+
+    .hero-title:hover .vulcan-salute {
+      transform: rotate(14deg) scale(1.18);
+    }
+
+    .hero-quote {
+      max-width: 640px;
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(135deg, rgba(19, 47, 58, 0.35) 0%, rgba(15, 34, 41, 0.15) 100%);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      backdrop-filter: blur(8px);
+      margin-bottom: 2.25rem;
+      position: relative;
+      z-index: 1;
+      clear: both;
+    }
+
+    .quote-text {
+      color: #b8c9cf;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      font-style: italic;
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+    }
+
+    .quote-cite {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .cite-line {
+      width: 18px;
+      height: 1px;
+      background: var(--accent-dim);
+      display: inline-block;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all 0.22s ease;
+      font-weight: 400;
+    }
+
+    .hero-btn.primary {
+      background: var(--accent);
+      color: #07151a;
+      font-weight: 500;
+      box-shadow: 0 4px 18px rgba(58, 138, 150, 0.25);
+    }
+
+    .hero-btn.primary:hover {
+      background: #479eab;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(58, 138, 150, 0.35);
+    }
+
+    .hero-btn.secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-btn.secondary:hover {
+      background: rgba(58, 138, 150, 0.12);
+      border-color: var(--accent-dim);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-btn .btn-arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .hero-btn:hover .btn-arrow {
+      transform: translateY(2px);
+    }
+
+        /* SECTIONS RETRÁTEIS */
+    section {
+      padding: 1.75rem 0;
+      transition: padding 0.3s ease;
+    }
+
+    section.is-open {
+      padding: 2rem 0 3rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      padding: 0.9rem 1.1rem;
+      margin: 0 -1.1rem;
+      border-radius: 12px;
+      transition: background 0.22s ease, color 0.22s ease;
+    }
+
+    .section-head:hover {
+      background: rgba(42, 111, 122, 0.12);
+    }
+
+    .section-head:hover .section-title {
+      color: var(--accent);
+    }
+
+    .section-head-left {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+    }
+
+    .section-toggle-icon {
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .section-head:hover .section-toggle-icon {
+      background: rgba(58, 138, 150, 0.18);
+      border-color: rgba(58, 138, 150, 0.35);
+      color: var(--accent);
+    }
+
+    section.is-open .section-toggle-icon {
+      transform: rotate(180deg);
+      color: var(--accent);
+      background: rgba(58, 138, 150, 0.22);
+      border-color: rgba(58, 138, 150, 0.45);
+    }
+
+    .section-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    section.is-open .section-content {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      margin-top: 1.25rem;
+    }
+
+    .section-content-inner {
+      min-height: 0;
+    }
+
+    .section-num {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    .section-line {
+      display: none;
+    }
+
+    /* SITES */
+    .site-list {
+      list-style: none;
+    }
+
+    .site-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 0.85rem 1.15rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s ease, transform 0.2s ease;
+      margin-bottom: 0.25rem;
+    }
+
+    .site-item:hover {
+      background: rgba(42, 111, 122, 0.15);
+      transform: translateX(4px);
+    }
+
+    .site-item:hover .site-name {
+      color: var(--accent);
+    }
+
+    .site-name {
+      font-size: 1.15rem;
+      font-weight: 400;
+      transition: color 0.2s ease;
+    }
+
+    .site-desc {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .site-arrow {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .site-item:hover .site-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* BLOG */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .post {
+      padding: 2rem;
+      background: var(--bg-2);
+      transition: background 0.2s ease, transform 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-radius: 12px;
+      border: none;
+    }
+
+    .post:hover {
+      background: var(--bg-3);
+      transform: translateY(-2px);
+    }
+
+    .post-date {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .post h3 {
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      line-height: 1.35;
+    }
+
+    .post p {
+      color: var(--text-dim);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .post-tag {
+      display: inline-block;
+      margin-top: 1.25rem;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* GITHUB */
+    .repo-list {
+      list-style: none;
+    }
+
+    .repo-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.25rem;
+      align-items: center;
+      padding: 0.85rem 1.15rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s ease, transform 0.2s ease;
+      margin-bottom: 0.25rem;
+    }
+
+    .repo-item:hover {
+      background: rgba(42, 111, 122, 0.15);
+      transform: translateX(4px);
+    }
+
+    .repo-item:hover .repo-name {
+      color: var(--accent);
+    }
+
+    .repo-icon {
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      min-height: 18px !important;
+      max-width: 18px !important;
+      max-height: 18px !important;
+      color: var(--text-dim);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .repo-name {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .repo-meta {
+      display: flex;
+      gap: 1.25rem;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+    }
+
+    .repo-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    /* FOTOS */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .photo {
+      aspect-ratio: 1 / 1;
+      background: var(--bg-3);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .photo svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      transition: transform 0.5s ease, opacity 0.3s ease;
+    }
+
+    .photo:hover svg {
+      transform: scale(1.04);
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(to top, rgba(10, 25, 32, 0.9), transparent);
+      font-size: 0.78rem;
+      color: var(--text);
+      letter-spacing: 0.08em;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .photo:hover .photo-caption {
+      opacity: 1;
+    }
+
+    /* VIDEOS */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .video-frame {
+      aspect-ratio: 16 / 9;
+      background: var(--bg-3);
+      border-radius: 10px;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .video:hover .video-frame {
+      border-color: var(--accent-dim);
+    }
+
+    .video-frame svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--text);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 25, 32, 0.6);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .video:hover .play {
+      border-color: var(--accent);
+      background: rgba(58, 138, 150, 0.15);
+    }
+
+    .play svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text);
+      margin-left: 3px;
+    }
+
+    .video h4 {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+
+    .video-meta {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-inner a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-inner a:hover {
+      color: var(--accent);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 720px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .brand-group {
+        gap: 0.75rem;
+      }
+
+      .header-badge {
+        font-size: 0.66rem;
+        padding: 0.2rem 0.55rem;
+      }
+      nav ul {
+        gap: 1.1rem;
+      }
+
+      nav a {
+        font-size: 0.72rem;
+      }
+
+      .site-item {
+        grid-template-columns: 1fr auto;
+      }
+
+      .site-desc {
+        display: none;
+      }
+
+      .section-head {
+        flex-wrap: wrap;
+      }
+
+      .section-line {
+      display: none;
+    }
+
+      .hero {
+        padding: 4rem 0 3.5rem;
+      }
+
+      section {
+        padding: 4rem 0;
+      }
+
+      .repo-item {
+        grid-template-columns: auto 1fr;
+      }
+
+      .repo-meta {
+        grid-column: 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <div class="brand-group">
+        <a href="#" class="brand">
+          <svg class="brand-mark" width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M16 3 L24 14 L22 28 L10 28 L8 14 Z" />
+            <path d="M10 28 L22 28" />
+            <circle cx="16" cy="17" r="1.2" fill="currentColor" stroke="none" />
+          </svg>
+          <div class="brand-name">Gnomo CWB</div>
+        </a>
+        <div class="header-badge">
+          <span class="pulse-dot"></span>
+          <span>Curitiba, BR &middot; 25&deg; 25' S</span>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#sites">Sites</a></li>
+          <li><a href="#redes-sociais">Redes Sociais</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#github">Github</a></li>
+          <li><a href="#fotos">Fotos</a></li>
+          <li><a href="#videos">Vídeos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+        <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">
+          Vida longa e pr&oacute;spera! <span class="vulcan-salute">&#128406;</span>
+        </h1>
+
+        <div class="hero-quote">
+          <p class="quote-text">&ldquo;Clama a mim, e responder-te-ei e anunciar-te-ei coisas grandes e firmes, que n&atilde;o sabes.&rdquo;</p>
+          <div class="quote-cite">
+            <span class="cite-line"></span>
+            <span>Jeremias 33:3</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#sites" class="hero-btn primary">
+            <span>Explorar</span>
+            <span class="btn-arrow">&#8595;</span>
+          </a>
+          <a href="https://github.com/gnomocwb" target="_blank" rel="noopener" class="hero-btn secondary">
+            <svg class="repo-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span>GitHub</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+            <section id="sites">
+      <div class="container">
+        <div class="section-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="section-head-left">
+            <span class="section-num">01</span>
+            <h2 class="section-title">Sites</h2>
+          </div>
+          <span class="section-toggle-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-content-inner">
+
+        <div class="repo-list">
+          <a href="https://fatosenoticiascwb.online/" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Fatos de Notícias CWB</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+          <a href="https://www.colab55.com/@malori" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Studio Malori (Colab55)</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+          <a href="https://www.zazzle.com.br/store/malori_cwb" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Studio Malori (Zazzle)</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+          <a href="https://alessandro836.gumroad.com/" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Gumroad</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+          <a href="https://radar-pre-os-mercado.vercel.app/" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Radar de preços de alimentos</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+          <a href="https://blogdocatarina.blogspot.com/" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Blog do Catarina</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+
+        </div>
+      
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <section id="redes-sociais">
+      <div class="container">
+        <div class="section-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="section-head-left">
+            <span class="section-num">02</span>
+            <h2 class="section-title">Redes Sociais</h2>
+          </div>
+          <span class="section-toggle-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-content-inner">
+
+        <div class="repo-list">
+          <a href="https://www.reddit.com/user/GnomoCWB/" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Reddit</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+          <a href="https://www.instagram.com/alessandro_dealmeida80" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Instagram</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+          <a href="https://www.linkedin.com/in/alealmeida/" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">LinkedIn</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+        </div>
+      
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section id="blog">
+      <div class="container">
+        <div class="section-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="section-head-left">
+            <span class="section-num">03</span>
+            <h2 class="section-title">Blog</h2>
+          </div>
+          <span class="section-toggle-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-content-inner">
+
+        <div class="repo-list">
+          <a href="https://anipniadigital.blogspot.com/" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Anipnia digital</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+        </div>
+      
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section id="github">
+      <div class="container">
+        <div class="section-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="section-head-left">
+            <span class="section-num">04</span>
+            <h2 class="section-title">Github</h2>
+          </div>
+          <span class="section-toggle-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-content-inner">
+
+        <div class="repo-list">
+          <a href="https://github.com/gnomocwb" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Gnomo CWB</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+        </div>
+      
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section id="fotos">
+      <div class="container">
+        <div class="section-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="section-head-left">
+            <span class="section-num">05</span>
+            <h2 class="section-title">Fotos</h2>
+          </div>
+          <span class="section-toggle-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-content-inner">
+
+        <div class="repo-list">
+          <a href="https://www.istockphoto.com/br/portfolio/AlessandroAlmeida" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Getty Images</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+        </div>
+      
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section id="videos">
+      <div class="container">
+        <div class="section-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="section-head-left">
+            <span class="section-num">06</span>
+            <h2 class="section-title">Vídeos</h2>
+          </div>
+          <span class="section-toggle-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-content-inner">
+
+        <div class="repo-list">
+          <a href="https://www.youtube.com/@GnomoCuritiba/videos" class="repo-item" target="_blank" rel="noopener">
+            <svg class="repo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span class="repo-name">Youtube</span>
+            <span class="site-arrow">&#8599;</span>
+          </a>
+        </div>
+      
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>&copy; 2026 Gnomo CWB</div>
+      <div>
+        <a href="mailto:gnomocwb80@gmail.com" style="display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          <span>gnomocwb80@gmail.com</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openSection(secId) {
+      const sec = document.getElementById(secId);
+      if (sec) {
+        sec.classList.add('is-open');
+        const head = sec.querySelector('.section-head');
+        if (head) head.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle ao clicar no cabecalho da secao
+      document.querySelectorAll('.section-head').forEach(head => {
+        head.addEventListener('click', () => {
+          const sec = head.closest('section');
+          if (sec) {
+            const isOpen = sec.classList.toggle('is-open');
+            head.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          }
+        });
+
+        // Acessibilidade via teclado
+        head.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            head.click();
+          }
+        });
+      });
+
+      // Abrir automaticamente ao clicar em links do menu ou Hero
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', () => {
+          const targetId = anchor.getAttribute('href').replace('#', '');
+          if (targetId) {
+            openSection(targetId);
+          }
+        });
+      });
+
+      // Se a URL ja contiver uma hashtag ao abrir
+      if (window.location.hash) {
+        const hashId = window.location.hash.replace('#', '');
+        openSection(hashId);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
